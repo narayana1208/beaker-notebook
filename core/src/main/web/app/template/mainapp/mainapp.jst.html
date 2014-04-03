@@ -20,10 +20,6 @@
            TODO - is there a more bootstrappy way to achieve left-alignment of the navbar and the rows?
         -->
     <div class="container pull-left" style="margin-left: 10px; padding-left: 0px;">
-      <a class="brand" href="#/control" ng-click="gotoControlPanel($event)" eat-click>
-        <img src="/beaker/app/images/beaker_icon@2x.png"></img>
-        Beaker
-      </a>
       <span class="brand" ng-if="loading"><i class='fa fa-refresh fa-spin text-white'></i></span>
       <ul class="sub-nav">
         <li class="dropdown" ng-repeat="m in getMenus()">
