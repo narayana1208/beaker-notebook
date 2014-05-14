@@ -41,15 +41,6 @@
                     "background": "#FFE0F0"
                 }
             }
-        },
-        {
-            "name": "R",
-            "plugin": "R",
-            "view": {
-                "cm": {
-                    "mode": "r"
-                }
-            }
         }
     ],
     "cells": [
@@ -75,20 +66,6 @@
             },
             "evaluatorReader": true,
             "lineCount": 3
-        },
-        {
-            "id": "code2uVtKX",
-            "type": "code",
-            "evaluator": "R",
-            "input": {
-                "body": "# This cell is for the R language.  Try running \"hist(rnorm(100))\".\n"
-            },
-            "output": {
-                "selectedType": "Html",
-                "elapsedTime": 945
-            },
-            "evaluatorReader": true,
-            "lineCount": 2
         },
         {
             "id": "text97Oipt",
