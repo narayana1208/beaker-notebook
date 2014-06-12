@@ -27,16 +27,67 @@
 
     var impls = {
       "Text": {
-        template: "<pre>{{getText()}}</pre>",
+        template: "<pre>{{getText()}}</pre>" +
+            "<bk-output-display type='Warning' model='model1'></bk-output-display>" +
+            "<bk-output-display type='Warning' model='model2'></bk-output-display>" +
+            "{{ focus }}",
         controller: function($scope) {
           $scope.getText = function() {
             var model = $scope.model.getCellModel();
             return (model && model.text) ? model.text : model;
           };
+
+          $scope.focus = "unset";
+
+          $scope.model1 = {
+            getCellModel: function() {
+              return "AAA";
+            },
+            resetShareMenuItems: function() {
+
+            },
+            updateFocus: function() {
+              console.log("updateFocus");
+              $scope.focus = "fa";
+            },
+            getFocus: function() {
+              return $scope.focus;
+            }
+          };
+
+          $scope.model2 = {
+            getCellModel: function() {
+              return "BBB";
+            },
+            resetShareMenuItems: function() {
+
+            },
+            updateFocus: function() {
+              console.log("updateFocus");
+              $scope.focus = "fb";
+            },
+            getFocus: function() {
+              return $scope.focus;
+            }
+          };
         }
       },
+
       "Warning": {
-        template: "<pre class='out_warning'>{{model.getCellModel().message}}</pre>"
+        template: "<div>Child - <span>{{ model.getCellModel() }}</span> <button ng-click='model.updateFocus()'>update Focus</button><span>{{model.getFocus()}}</span></div>",
+        scope: {
+          model: "="
+        },
+        controller: function($scope, bkCellMenuPluginManager) {
+          $scope.getShareMenuPlugin = function() {
+            return bkCellMenuPluginManager.getPlugin("bko-html");
+          };
+          $scope.id = $scope.model.getCellModel();
+          console.log("started watching " + $scope.id);
+          $scope.$watch("model.getFocus()", function(value) {
+            console.log("updated", value, $scope.id);
+          });
+        }
       },
       "Error": {
         template: "<pre class='out_error' ng-hide='expanded'>" +
