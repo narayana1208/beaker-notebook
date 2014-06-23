@@ -211,7 +211,14 @@ public class PluginServiceLocatorRest {
   private void startReverseProxy() throws InterruptedException, IOException {
     generateNginxConfig();
     System.out.println("running nginx: " + this.nginxCommand);
-    Process proc = Runtime.getRuntime().exec(this.nginxCommand);
+    List<String> envList = new ArrayList<>();
+    for (Map.Entry<String, String> entry: System.getenv().entrySet()) {
+      envList.add(entry.getKey() + "=" + entry.getValue());
+    }
+    envList.add("DYLD_LIBRARY_PATH=./nginx/bin");
+    String[] env = new String[envList.size()];
+    envList.toArray(env);
+    Process proc = Runtime.getRuntime().exec(this.nginxCommand, env);
     startGobblers(proc, "nginx", null, null);
     this.nginxProc = proc;
   }
