@@ -200,6 +200,10 @@ public class PluginServiceLocatorRest {
     return System.getProperty("os.name").contains("Windows");
   }
 
+  private boolean macosx() {
+    return System.getProperty("os.name").contains("Mac");
+  }
+
   private static boolean windowsStatic() {
     return System.getProperty("os.name").contains("Windows");
   }
@@ -211,13 +215,16 @@ public class PluginServiceLocatorRest {
   private void startReverseProxy() throws InterruptedException, IOException {
     generateNginxConfig();
     System.out.println("running nginx: " + this.nginxCommand);
-    List<String> envList = new ArrayList<>();
-    for (Map.Entry<String, String> entry: System.getenv().entrySet()) {
-      envList.add(entry.getKey() + "=" + entry.getValue());
+    String[] env = null;
+    if (macosx()) {
+      List<String> envList = new ArrayList<>();
+      for (Map.Entry<String, String> entry: System.getenv().entrySet()) {
+        envList.add(entry.getKey() + "=" + entry.getValue());
+      }
+      envList.add("DYLD_LIBRARY_PATH=./nginx/bin");
+      env = new String[envList.size()];
+      envList.toArray(env);
     }
-    envList.add("DYLD_LIBRARY_PATH=./nginx/bin");
-    String[] env = new String[envList.size()];
-    envList.toArray(env);
     Process proc = Runtime.getRuntime().exec(this.nginxCommand, env);
     startGobblers(proc, "nginx", null, null);
     this.nginxProc = proc;

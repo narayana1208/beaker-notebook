@@ -19,7 +19,6 @@ import sys
 
 def setup_env():
     if sys.platform == 'darwin':
-        os.environ["DYLD_LIBRARY_PATH"] = './nginx/bin'
         jvms = os.listdir('/Library/Java/JavaVirtualMachines/')
         if len(jvms) == 0:
             os.environ['JAVA_HOME'] = '/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home'
