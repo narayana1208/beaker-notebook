@@ -47,6 +47,8 @@
           "</svg>" +
           "</div>",
       controller : function($scope) {
+        console.log("TEST");
+        console.log($scope.model.getCellModel());
         $scope.getShareMenuPlugin = function() {
           return bkCellMenuPluginManager.getPlugin(CELL_TYPE);
         };
@@ -56,7 +58,7 @@
         });
       },
       link : function(scope, element, attrs) {
-
+        console.log("link", element.find("#plotContainer"));
         // rendering code
         element.find("#plotContainer").resizable({
           maxWidth : element.width(), // no wider than the width of the cell
@@ -334,7 +336,7 @@
         scope.renderData = function() {
           var data = scope.stdmodel.data, fdata = scope.fdata, numLines = data.length, focus = scope.focus;
           var mapX = scope.data2scrX, mapY = scope.data2scrY;
-          
+
           var W = scope.jqsvg.width(), H = scope.jqsvg.height();
           var lMargin = scope.layout.leftLayoutMargin, bMargin = scope.layout.bottomLayoutMargin,
               tMargin = scope.layout.topLayoutMargin, rMargin = scope.layout.rightLayoutMargin;
@@ -641,7 +643,7 @@
               var reles = [];
               for (var j = fdata[i].leftIndex; j <= fdata[i].rightIndex; j++) {
                 var p = eles[j];
-                var ele = { 
+                var ele = {
                   "id": "constband_" + i + "_" + j
                 };
                 if (p.type === "x") {
