@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "bower": "1.3.8",
+    "bower": "1.3.11",
     "karma": "~0.10",
     "karma-jasmine": "~0.1",
     "karma-ng-scenario": "~0.1.0",
@@ -11,7 +11,8 @@
   },
   "scripts": {
     "compile": "gulp compile",
-    "watch": "gulp watch"
+    "watch": "gulp watch",
+    "bower": "bower install --allow-root"
   },
   "devDependencies": {
     "gulp": "^3.8.2",

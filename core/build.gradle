@@ -54,9 +54,9 @@ task (npmInstall, type: Exec) {
 
 task (bowerInstall, type: Exec) {
   if (windows()) {
-    commandLine 'cmd', '/c', 'bower', 'install'
+    commandLine 'cmd', 'npm', 'run', 'bower'
   } else {
-    commandLine './node_modules/bower/bin/bower', 'install'
+    commandLine 'npm', 'run', 'bower'
   }
 }
 
