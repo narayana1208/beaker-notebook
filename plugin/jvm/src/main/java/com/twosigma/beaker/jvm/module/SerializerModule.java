@@ -69,7 +69,7 @@ public class SerializerModule
     bind(TableDisplay.Serializer.class);
     bind(OutputContainer.Serializer.class);
     // enable this to use the example object container
-    //bind(TestContainer.Serializer.class);
+    bind(TestContainer.Serializer.class);
     bind(StringObject.Serializer.class);
     bind(BeakerProgressUpdate.Serializer.class);
   }
@@ -96,7 +96,7 @@ public class SerializerModule
     module.addSerializer(TableDisplay.class, injector.getInstance(TableDisplay.Serializer.class));
     module.addSerializer(OutputContainer.class, injector.getInstance(OutputContainer.Serializer.class));
     // enable this to use the example object container
-    //module.addSerializer(TestContainer.class, injector.getInstance(TestContainer.Serializer.class));
+    module.addSerializer(TestContainer.class, injector.getInstance(TestContainer.Serializer.class));
     module.addSerializer(StringObject.class, injector.getInstance(StringObject.Serializer.class));
     module.addSerializer(BeakerProgressUpdate.class, injector.getInstance(BeakerProgressUpdate.Serializer.class));
 
